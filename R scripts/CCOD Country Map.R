@@ -10,6 +10,12 @@
 library(maps)
 library(mapdata)
 
+#### Summarise article density by country ####
+ccod.countries <- ccod.included %>%
+  dplyr::group_by(pop_country) %>% 
+  dplyr::summarise(count = n()) %>% 
+  dplyr::arrange(desc(count))
+
 #### Load world map ####
 world.map <- map_data("world")
 

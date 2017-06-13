@@ -36,12 +36,6 @@ ccod.race <- ccod.included %>%
 ccod.lang <- ccod.included %>%
   dplyr::filter(lang_reported == "Yes")
 
-#### Summarise countries ####
-ccod.included %>% 
-  dplyr::group_by(pop_country) %>% 
-  dplyr::summarise(count = n()) %>% 
-  dplyr::arrange(desc(count))
-
 #### Summarise tests ####
 ccod.included %>% 
   dplyr::select(dplyr::starts_with("cognitive_test")) %>% 
