@@ -37,5 +37,6 @@ ggplot() +
                                      fill = count)) +
   coord_fixed(1.3) +
   geom_point() + 
-  scale_fill_gradient(trans = "log10") +
+  scale_fill_gradient(name = "Number of\npublications",
+                      trans = "log10") +
   ditch_the_axes
