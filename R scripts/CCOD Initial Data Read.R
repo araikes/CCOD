@@ -29,5 +29,12 @@ library(magrittr)
 ccod.included <- ccod.database %>%
   dplyr::filter(text_scrn_include == "Yes - include" | text_scrn_include == "Kindof - no tests specific outcome??")
 
+#### Evaluate for issues of critical missingness ####
+ccod.included %>%
+  dplyr::filter(is.na(origin_reported)) %>%
+  View()
 
+ccod.included %>%
+  dplyr::filter(is.na(lang_reported)) %>%
+  View()
 
