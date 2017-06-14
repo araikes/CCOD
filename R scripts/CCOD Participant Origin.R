@@ -31,25 +31,37 @@ ccod.origin.long <- ccod.origin.long %>%
                                       ifelse(grepl("modtbi", Origin), "modTBI",
                                              ifelse(grepl("stbi", Origin), "sTBI", "Total")))))
 
-#### Separate whole numbers from percentage to facilitate manipulation. These
-#### will be recombined after disentangling the percentages ####
+#### Convert origin names to more usable names. ####
+ccod.origin.long$Origin <- gsub("^[^_]*_[^_]*_[^_]*_", "", ccod.origin.long$Origin)
 
-ccod.origin.percs <- ccod.origin.long %>%
-  dplyr::filter(n_orig_nontbi_perc == "Percentage" |
-                  n_orig_mtbi_perc == "Percentage" | 
-                  n_orig_modtbi_perc == "Percentage" | 
-                  n_orig_stbi_perc == "Percentage" |
-                  n_orig_totsamp_perc == "Percentage") %>%
-  dplyr::mutate(participants = ifelse(Group == "Non-TBI" & !is.na(n_orig_nontbi_perc), 
-                                      round((count/100)*n_nontbi,0), NA)) %>%
-  dplyr::mutate(participants = ifelse(Group == "mTBI" & !is.na(n_orig_mtbi_perc),
-                                      round((count/100)*n_tbi_mild,0), participants)) %>%
-  dplyr::mutate(participants = ifelse(Group == "modTBI" & !is.na(n_orig_modtbi_perc),
-                                      round((count/100)*n_tbi_mod,0), participants)) %>%
-  dplyr::mutate(participants = ifelse(Group == "sTBI" & !is.na(n_orig_stbi_perc),
-                                      round((count/100)*n_tbi_sev,0), participants)) %>%
-  dplyr::mutate(participants = ifelse(Group == "Total" & !is.na(n_orig_totsamp_perc) & !is.na(n_total),
-                                      round((count/100)*n_total,0), participants)) %>%
-  dplyr::mutate(check = ifelse(!is.na(count) & is.na(participants), "Error", NA)) %>%
-  dplyr::filter(!is.na(check))
-          
+#### Compute numbers of participants from various backgrounds per severity/grouping ####
+ccod.origin.nontbi <- compute_origin_by_group(ccod.origin.long, "Non-TBI")
+ccod.origin.mtbi <- compute_origin_by_group(ccod.origin.long, "mTBI")
+ccod.origin.modtbi <- compute_origin_by_group(ccod.origin.long, "modTBI")
+ccod.origin.stbi <- compute_origin_by_group(ccod.origin.long, "sTBI")
+ccod.origin.total <- compute_origin_by_total(ccod.origin.long)
+
+#### Recombine dataframes ####
+ccod.origin.complete <- dplyr::bind_rows(ccod.origin.nontbi, ccod.origin.mtbi, 
+                                  ccod.origin.modtbi, ccod.origin.stbi, 
+                                  ccod.origin.total) %>%
+  dplyr::ungroup() %>%
+  dplyr::select(record_id, Group, Origin, participants) %>%
+  tidyr::spread(Origin, participants)
+
+#### Summarise race/ethnicity/country of origin numbers ####
+ccod.origin.summary1a <- ccod.origin.complete %>%
+  dplyr::group_by(record_id) %>% 
+  dplyr::select(-Group) %>%
+  dplyr::summarise_all(sum)
+
+
+ccod.origin.summary1b <- ccod.origin.summary1a %>%
+  dplyr::ungroup() %>%
+  dplyr::select(-record_id) %>%
+  replace(is.na(.), 0) %>%
+  dplyr::summarise_all(sum) %>%
+  tidyr::gather(Origin, n) %>%
+  dplyr::arrange(desc(n)) %>%
+  dplyr::mutate(proportion = round(n/sum(n)*100, 3))
+
