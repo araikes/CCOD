@@ -31,10 +31,3 @@ ccod.included <- ccod.database %>%
 
 
 
-
-
-ccod.lang <- ccod.included %>%
-  dplyr::filter(lang_reported == "Yes")
-
-
-
