@@ -47,33 +47,67 @@ ccod.lang.complete <- dplyr::bind_rows(ccod.lang.nontbi, ccod.lang.mtbi,
                                          ccod.lang.modtbi, ccod.lang.stbi, 
                                          ccod.lang.total) %>%
   dplyr::ungroup() %>%
-  dplyr::select(record_id, Group, Language, participants) %>%
+  dplyr::select(record_id, n_nontbi:n_total, Group, Language, participants) %>%
   tidyr::spread(Language, participants)
 
 #### Summarise language numbers ####
+ccod.lang.samplesizes <- ccod.lang.complete %>%
+  dplyr::select(record_id:n_total) %>%
+  dplyr::mutate(total_n = ifelse(!is.na(n_total), n_total, rowSums(.[2:6], na.rm = TRUE))) %>%
+  dplyr::select(record_id, total_n) %>%
+  dplyr::distinct()
+
 ccod.lang.summary1a <- ccod.lang.complete %>%
   dplyr::group_by(record_id) %>%
-  dplyr::select(-Group) %>%
-  dplyr::summarise_all(sum)
+  dplyr::select(-n_nontbi:-Group) %>%
+  dplyr::summarise_all(sum) %>%
+  dplyr::left_join(ccod.lang.samplesizes) %>%
+  dplyr::select(record_id, total_n, dplyr::everything())
 
 ccod.lang.summary1b <- ccod.lang.summary1a %>%
   dplyr::ungroup() %>%
-  dplyr::select(-record_id) %>%
   replace(is.na(.), 0) %>%
+  dplyr::select(-record_id, -total_n) %>%
   dplyr::summarise_all(sum) %>%
-  tidyr::gather(Language, n) %>%
+  tidyr::gather(lang, n) %>%
   dplyr::arrange(desc(n)) %>%
-  dplyr::mutate(proportion = round(n/sum(n)*100, 3))
+  dplyr::mutate(proportion = round(n/sum(ccod.lang.samplesizes$total_n)*100, 3))
 
 ccod.lang.summary2 <- ccod.lang.summary1a %>%
-  dplyr::mutate(total_n = rowSums(.[2:28], na.rm = TRUE)) %>%
   dplyr::ungroup() %>%
   dplyr::mutate_at(dplyr::vars(both:swedish), dplyr::funs(round((./total_n)*100, 3)))
 
 ccod.lang.summary2b <- ccod.lang.summary2  %>%
-  dplyr::filter(english >= 75.000)
+  dplyr::select(-total_n) %>%
+  tidyr::gather(Language, n, -record_id) %>%
+  dplyr::filter(n >= 75.000)
 
 ccod.lang.summary2c <- ccod.lang.summary2b %>%
-  dplyr::filter(english == 100.000)
+  dplyr::filter(n == 100.000) %>%
+  dplyr::group_by(Language) %>%
+  dplyr::summarise(count = n())
+
+ccod.lang.summary2d <- ccod.lang.summary2 %>%
+  dplyr::select(-total_n) %>%
+  tidyr::gather(Language, n, -record_id) %>%
+  dplyr::filter(Language == "english") %>%
+  dplyr::filter(!is.na(n)) %>%
+  dplyr::arrange(desc(n))
+
+ccod.lang.summary3 <- ccod.lang.summary2 %>%
+  dplyr::select(-record_id, -total_n) %>%
+  tidyr::gather(Language, n) %>%
+  dplyr::filter(!is.na(n)) %>%
+  dplyr::group_by(Language) %>%
+  dplyr::summarise(count = n()) %>%
+  dplyr::arrange(desc(count))
+
+ccod.lang.summary4 <- ccod.lang.summary1a %>%
+  dplyr::select(-total_n) %>%
+  tidyr::gather(Language, n, -record_id) %>%
+  dplyr::filter(!is.na(n)) %>%
+  dplyr::group_by(record_id) %>%
+  dplyr::summarise(count = n()) %>%
+  dplyr::arrange(desc(count))
 
   
