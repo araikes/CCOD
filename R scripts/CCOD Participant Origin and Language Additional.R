@@ -8,8 +8,9 @@
 # Identify the number of sources reporting race/ethnicity/CoO or language
 dplyr::bind_rows(ccod.lang, ccod.origin) %>% 
   dplyr::select(record_id) %>% 
-  dplyr::distinct(record_id) %>%
-  dplyr::summarise(count = n())
+  dplyr::distinct(record_id) %>% 
+  dplyr::summarise(count = n()) %>%
+  View()
 
 # Identify the number of sources reporting both race/ethncitiy/CoO and language
 dplyr::bind_rows(ccod.lang, ccod.origin) %>%
@@ -17,10 +18,28 @@ dplyr::bind_rows(ccod.lang, ccod.origin) %>%
   dplyr::group_by(record_id) %>%
   dplyr::summarise(count = n()) %>%
   dplyr::filter(count > 1) %>%
-  dplyr::ungroup()
+  dplyr::ungroup() %>%
+  View()
 
-dplyr::bind_rows(ccod.lang, ccod.origin) %>%
+#### Race/Language analyses ####
+ccod.demographic.analyses <- dplyr::bind_rows(ccod.lang, ccod.origin) %>%
   dplyr::select(record_id, origin_analysis, lang_analysis) %>%
   dplyr::distinct() %>%
-  dplyr::filter(origin_analysis == "Yes" | lang_analysis == "Yes") %>%
-  View()
+  dplyr::filter(origin_analysis == "Yes" | lang_analysis == "Yes") 
+
+ccod.origin.analyses <- dplyr::bind_rows(ccod.lang, ccod.origin) %>%
+  dplyr::select(record_id, origin_analysis, lang_analysis) %>%
+  dplyr::distinct() %>%
+  dplyr::filter(origin_analysis == "Yes") %>%
+  dplyr::left_join(ccod.articleinfo) %>%
+  dplyr::select(record_id, pub_year:pub_doi, origin_analysis)
+
+ccod.lang.analyses <- dplyr::bind_rows(ccod.lang, ccod.origin) %>%
+  dplyr::select(record_id, origin_analysis, lang_analysis) %>%
+  dplyr::distinct() %>%
+  dplyr::filter(lang_analysis == "Yes") %>%
+  dplyr::left_join(ccod.articleinfo) %>%
+  dplyr::select(record_id, pub_year:pub_doi, lang_analysis)
+
+
+
