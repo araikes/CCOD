@@ -14,7 +14,10 @@ library(mapdata)
 ccod.countries <- ccod.included %>%
   dplyr::group_by(pop_country) %>% 
   dplyr::summarise(count = n()) %>% 
-  dplyr::arrange(desc(count))
+  dplyr::arrange(desc(count)) %>%
+  dplyr::ungroup() %>%
+  dplyr::mutate(proportion = count/sum(count)) %>%
+  dplyr::filter(pop_country != "Unknown or Unreported" & pop_country != "Multiple countries")
 
 #### Load world map ####
 world.map <- map_data("world")
@@ -45,4 +48,14 @@ ggplot() +
   geom_point() + 
   scale_fill_gradient(name = "Number of\npublications",
                       trans = "log10") +
+  ditch_the_axes
+
+ggplot() + 
+  geom_polygon(data = world.map, aes(x=long, 
+                                     y = lat, 
+                                     group = group,
+                                     fill = proportion)) +
+  coord_fixed(1.3) +
+  geom_point() + 
+  scale_fill_gradient(name = "Proportion of\npublications") +
   ditch_the_axes
