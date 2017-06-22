@@ -9,8 +9,7 @@
 dplyr::bind_rows(ccod.lang, ccod.origin) %>% 
   dplyr::select(record_id) %>% 
   dplyr::distinct(record_id) %>% 
-  dplyr::summarise(count = n()) %>%
-  View()
+  dplyr::summarise(count = n()) 
 
 # Identify the number of sources reporting both race/ethncitiy/CoO and language
 dplyr::bind_rows(ccod.lang, ccod.origin) %>%
@@ -19,7 +18,7 @@ dplyr::bind_rows(ccod.lang, ccod.origin) %>%
   dplyr::summarise(count = n()) %>%
   dplyr::filter(count > 1) %>%
   dplyr::ungroup() %>%
-  View()
+  dplyr::summarise(count = n())
 
 #### Race/Language analyses ####
 ccod.demographic.analyses <- dplyr::bind_rows(ccod.lang, ccod.origin) %>%
