@@ -8,7 +8,6 @@
 # Initial Date: 06/08/2017
 
 #### Source files ####
-#library(REDCapR)
 source("R scripts/CCOD Function Definitions.R")
 
 #### Call REDCap API ####
@@ -18,26 +17,25 @@ source("R scripts/CCOD Function Definitions.R")
 redcap.uri <- "https://redcap.cehs.usu.edu/api/"
 redcap.key <- "795C0CFA3E0445A3AE2C876F37ADC1EA"
 ccod.database <- redcapImport(uri = redcap.uri, key = redcap.key)
-#ccod.database <- redcap_read(redcap_uri = redcap.uri, token = redcap.key)
 
 rm(redcap.key)
 
 #### Load Libraries ####
-library(magrittr)
+library(tidyverse)
 
 #### Filter database for included articles ####
 ccod.included <- ccod.database %>%
-  dplyr::filter(text_scrn_include == "Yes - include" | text_scrn_include == "Kindof - no tests specific outcome??")
+  filter(text_scrn_include == "Yes - include" | text_scrn_include == "Kindof - no tests specific outcome??")
 
 ccod.articleinfo <- ccod.included %>%
-  dplyr::select(record_id:pub_doi)
+  select(record_id:pub_doi)
 
 #### Evaluate for issues of critical missingness ####
 ccod.included %>%
-  dplyr::filter(is.na(origin_reported)) %>%
+  filter(is.na(origin_reported)) %>%
   View()
 
 ccod.included %>%
-  dplyr::filter(is.na(lang_reported)) %>%
+  filter(is.na(lang_reported)) %>%
   View()
 
