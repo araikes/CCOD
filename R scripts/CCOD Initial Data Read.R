@@ -22,6 +22,7 @@ rm(redcap.key)
 
 #### Load Libraries ####
 library(tidyverse)
+library(stringr)
 
 #### Filter database for included articles ####
 ccod.included <- ccod.database %>%
@@ -38,4 +39,11 @@ ccod.included %>%
 ccod.included %>%
   filter(is.na(lang_reported)) %>%
   View()
+
+#### Get labels for languages and groups ####
+var.width <- 30
+labels <- data.frame(var = colnames(ccod.included), label = get_label(ccod.included)) %>%
+  mutate(aesthetic.label = str_wrap(label, width = var.width)) %>%
+  select(-label)
+rownames(labels) <- c()
 
