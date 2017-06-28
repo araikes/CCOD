@@ -10,30 +10,26 @@
 #### of language. ####
 
 ccod.lang <- ccod.included %>%
-  filter(lang_reported == "Yes")
-
-#### Retain necessary columns ####
-ccod.lang.limited <- ccod.lang %>%
+  filter(lang_reported == "Yes") %>%
   select(record_id:pub_title, n_nontbi:n_total, lang_analysis, 
                 n_lang_nontbi_perc:total_sample_language_complete) %>%
   select(-contains("complete"))
 
 #### Convert to long format for manipulation ####
-ccod.lang.long <- ccod.lang.limited %>%
-  gather(Language, count, c(-record_id:-lang_analysis, -n_lang_nontbi_perc,
+ccod.lang.long <- ccod.lang %>%
+  gather(var, count, c(-record_id:-lang_analysis, -n_lang_nontbi_perc,
                                  -n_lang_mtbi_perc, -n_lang_modtbi_perc, -n_lang_stbi_perc,
                                  -n_lang_totsamp_perc)) %>%
   arrange(desc(pub_author))
 
 #### Add group indicator ####
 ccod.lang.long <- ccod.lang.long %>%
-  mutate(Group = ifelse(grepl("nontbi", Language), "Non-TBI",
-                               ifelse(grepl("mtbi", Language), "mTBI",
-                                      ifelse(grepl("modtbi", Language), "modTBI",
-                                             ifelse(grepl("stbi", Language), "sTBI", "Total")))))
-
-#### Convert lang names to more usable names. ####
-ccod.lang.long$Language <- gsub("^[^_]*_[^_]*_[^_]*_", "", ccod.lang.long$Language)
+  left_join(labels) %>%
+  rename(Language = aesthetic.label) %>%
+  mutate(Group = ifelse(grepl("nontbi", var), "Non-TBI",
+                               ifelse(grepl("mtbi", var), "mTBI",
+                                      ifelse(grepl("modtbi", var), "modTBI",
+                                             ifelse(grepl("stbi", var), "sTBI", "Total")))))
 
 #### Compute numbers of participants from various backgrounds per severity/grouping ####
 ccod.lang.nontbi <- compute_lang_by_group(ccod.lang.long, "Non-TBI")
@@ -75,7 +71,7 @@ ccod.lang.summary1b <- ccod.lang.summary1a %>%
 
 ccod.lang.summary2 <- ccod.lang.summary1a %>%
   ungroup() %>%
-  mutate_at(vars(both:swedish), funs(round((./total_n)*100, 3)))
+  mutate_at(vars(`Australian English`:Swedish), funs(round((./total_n)*100, 3)))
 
 ccod.lang.summary2b <- ccod.lang.summary2  %>%
   select(-total_n) %>%
@@ -90,7 +86,7 @@ ccod.lang.summary2c <- ccod.lang.summary2b %>%
 ccod.lang.summary2d <- ccod.lang.summary2 %>%
   select(-total_n) %>%
   gather(Language, n, -record_id) %>%
-  filter(Language == "english") %>%
+  filter(Language == "English") %>%
   filter(!is.na(n)) %>%
   arrange(desc(n))
 
@@ -108,6 +104,7 @@ ccod.lang.summary4 <- ccod.lang.summary1a %>%
   filter(!is.na(n)) %>%
   group_by(record_id) %>%
   summarise(count = n()) %>%
+  filter(count > 1) %>%
   arrange(desc(count))
 
   
