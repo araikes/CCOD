@@ -10,29 +10,25 @@
 #### of race, ethnicity or country of origin. ####
 
 ccod.origin <- ccod.included %>%
-  filter(origin_reported == "Yes")
-
-#### Remove extraneous columns ####
-ccod.origin.limited <- ccod.origin %>%
+  filter(origin_reported == "Yes") %>%
   select(record_id:pub_title, n_nontbi:n_total, origin_analysis, n_orig_nontbi_perc:n_orig_totsamp_zimb) %>%
   select(-contains("complete"))
 
 #### Convert to long format for manipulation ####
-ccod.origin.long <- ccod.origin.limited %>%
-  gather(Origin, count, c(-record_id:-origin_analysis, -n_orig_nontbi_perc,
+ccod.origin.long <- ccod.origin %>%
+  gather(var, count, c(-record_id:-origin_analysis, -n_orig_nontbi_perc,
                                  -n_orig_mtbi_perc, -n_orig_modtbi_perc, -n_orig_stbi_perc,
                                  -n_orig_totsamp_perc)) %>%
   arrange(desc(pub_author))
 
 #### Add group indicator ####
 ccod.origin.long <- ccod.origin.long %>%
-  mutate(Group = ifelse(grepl("nontbi", Origin), "Non-TBI",
-                               ifelse(grepl("mtbi", Origin), "mTBI",
-                                      ifelse(grepl("modtbi", Origin), "modTBI",
-                                             ifelse(grepl("stbi", Origin), "sTBI", "Total")))))
-
-#### Convert origin names to more usable names. ####
-ccod.origin.long$Origin <- gsub("^[^_]*_[^_]*_[^_]*_", "", ccod.origin.long$Origin)
+  left_join(labels) %>%
+  rename(Origin = aesthetic.label) %>%
+  mutate(Group = ifelse(grepl("nontbi", var), "Non-TBI",
+                               ifelse(grepl("mtbi", var), "mTBI",
+                                      ifelse(grepl("modtbi", var), "modTBI",
+                                             ifelse(grepl("stbi", var), "sTBI", "Total")))))
 
 #### Compute numbers of participants from various backgrounds per severity/grouping ####
 ccod.origin.nontbi <- compute_origin_by_group(ccod.origin.long, "Non-TBI")
@@ -59,7 +55,7 @@ ccod.origin.samplesizes <- ccod.origin.complete %>%
 ccod.origin.summary1a <- ccod.origin.complete %>%
   group_by(record_id) %>% 
   select(-n_nontbi:-Group) %>%
-  summarise_at(vars(aboriginal:zimb), funs(sum)) %>%
+  summarise_at(vars(Aboriginal:Zimbabwean), funs(sum)) %>%
   left_join(ccod.origin.samplesizes) %>%
   select(record_id, total_n, everything())
 
@@ -73,10 +69,18 @@ ccod.origin.summary1b <- ccod.origin.summary1a %>%
   mutate(proportion = round(n/sum(ccod.origin.samplesizes$total_n)*100, 3))
 
 # Separate race/ethnicity from country of origin
+col.labels <- colnames(ccod.origin.summary1a)
+coo.labels <- c("Australia or New Zealand", "Brazil", "Canada", "Cuba", "Dominican Republic",
+                "Egypt", "India", "Indonesia", "Lebanon", "Mexico", "Netherlands", "Nicaragua", "Norway",
+                "Puerto Rico", "Singapore", "Spain", "South America", "United Kingdom", "United States", 
+                "US - English as primary\nlanguage", "US - Spanish as primary\nlanguage",
+                "US (English or Spanish\nSpeaking)", "US or Canada", "Venezuela")
+
+origin.labels <- setdiff(col.labels, coo.labels)
+coo.indices <- match(coo.labels, col.labels)
+
 ccod.origin.summary2 <- ccod.origin.summary1a %>%
-  select(-ausnz, -brazil, -canada, -cuba, -domrep, -egypt, -india,
-                -indonesia, -lebanon, -mexico, -netherlands, -norway, -puertorico, -singapore, -spain, -uk, 
-                -unitedstates, -uscanada, -usengl, -usenglspan, -usspanish, -venezuela) %>%
+  select(origin.labels) %>%
   group_by(record_id) %>%
   summarise_all(sum)
 
@@ -101,7 +105,7 @@ ccod.origin.summary2c <- ccod.origin.summary2 %>%
 ccod.origin.summary2d <- ccod.origin.summary2 %>%
   group_by(record_id, total_n) %>%
   summarise_all(sum) %>%
-  mutate_at(vars(aboriginal:zimb), funs(round((./total_n)*100, 3))) %>%
+  mutate_at(vars(Aboriginal:Zimbabwean), funs(round((./total_n)*100, 3))) %>%
   select(-total_n) %>%
   gather(Origin, n, -record_id) %>%
   filter(n >= 70) %>%
@@ -111,9 +115,7 @@ ccod.origin.summary2d <- ccod.origin.summary2 %>%
 
 #### Assess country of origin ####
 ccod.origin.summary3 <- ccod.origin.summary1a %>%
-  select(record_id, total_n, ausnz, brazil, canada, cuba, domrep, egypt, india,
-                indonesia, lebanon, mexico, netherlands, norway, puertorico, singapore, spain, uk, 
-                unitedstates, uscanada, usengl, usenglspan, usspanish, venezuela) %>%
+  select(record_id, total_n, coo.labels) %>%
   group_by(record_id) %>%
   summarise_all(sum)
 
@@ -140,7 +142,7 @@ ccod.origin.summary3c <- ccod.origin.summary3 %>%
 ccod.origin.summary3d <- ccod.origin.summary3 %>%
   group_by(record_id, total_n) %>%
   summarise_all(sum) %>%
-  mutate_at(vars(ausnz:venezuela), funs(round((./total_n)*100, 3))) %>%
+  mutate_at(vars(`Australia or New Zealand`:Venezuela), funs(round((./total_n)*100, 3))) %>%
   select(-total_n) %>%
   gather(Origin, n, -record_id) %>%
   filter(n >= 50) %>%
