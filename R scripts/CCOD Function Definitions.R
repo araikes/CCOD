@@ -10,8 +10,7 @@ redcapImport <- function(uri, key) {
   # http://biostat.mc.vanderbilt.edu/wiki/pub/Main/JoAnnAlvarez/api.pdf.
   require(RCurl)
   
-  eval(expr = parse(text =
-                      getURL("https://raw.githubusercontent.com/graywh/redcap/master/redcapExport.R")))
+  source("./R scripts/API Import.R")
   chartAbstraction <- redcapExport(APIKEY = key,
                                    URI = uri,
                                    labels = TRUE,
