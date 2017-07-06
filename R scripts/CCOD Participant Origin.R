@@ -57,7 +57,7 @@ ccod.origin.samplesizes <- ccod.origin.complete %>%
 ccod.origin.summary1a <- ccod.origin.complete %>%
   group_by(record_id) %>% 
   select(-n_nontbi:-Group) %>%
-  summarise_at(vars(Aboriginal:Zimbabwean), funs(sum)) %>%
+  summarise_at(vars(Aboriginal:Zimbabwean), funs(sum(., na.rm = TRUE))) %>%
   left_join(ccod.origin.samplesizes) %>%
   select(record_id, total_n, everything())
 
@@ -98,7 +98,7 @@ ccod.origin.summary2b <- ccod.origin.summary2 %>%
   group_by(record_id) %>%
   select(-total_n) %>%
   gather(Origin, n, -record_id) %>%
-  filter(!is.na(n)) %>%
+  filter(n != 0.000) %>%
   distinct(record_id)
 
 ccod.origin.samplesizes.race <- ccod.origin.samplesizes %>%
@@ -137,7 +137,7 @@ ccod.origin.summary3b <- ccod.origin.summary3 %>%
   group_by(record_id) %>%
   select(-total_n) %>%
   gather(Origin, n, -record_id) %>%
-  filter(!is.na(n)) %>%
+  filter(n != 0.000) %>%
   distinct(record_id)
 
 ccod.origin.summary3b %>% filter(record_id %in% ccod.origin.summary2b$record_id) %>% View()
@@ -176,12 +176,14 @@ origin.table <- ccod.origin.summary1c %>%
   select(-pub_year:-pub_journal, -pub_doi) %>%
   select(record_id, pub_apa, everything()) %>%
   gather(Orig, n, -record_id, -pub_apa, -total_n) %>%
-  filter(!is.na(n)) %>%
+  filter(n != 0.000) %>%
+  arrange(desc(n)) %>%
+  mutate(n = round(n, 2)) %>% group_by(record_id, pub_apa) %>% summarise(total = sum(n)) %>% filter(total < 99.99) 
   unite(Origin, Orig, n, sep = ", ") %>%
-  arrange(record_id)
+  arrange(pub_apa, record_id)
 
 write_csv(origin.table, 
-          path = "C:/Users/adamraikes/Documents/GitHub/CCOD/Tables/Origin.csv")
+          path = "C:/Users/adamraikes/Documents/GitHub/CCOD/Tables/Origin2.csv")
 
 
 

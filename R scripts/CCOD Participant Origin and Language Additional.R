@@ -19,6 +19,7 @@ bind_rows(ccod.lang, ccod.origin) %>%
   summarise(count = n()) %>%
   filter(count > 1) %>%
   ungroup() %>%
+  left_join(ccod.articleinfo) %>%
   View()
 
 #### Race/Language analyses ####

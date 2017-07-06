@@ -56,7 +56,7 @@ ccod.lang.samplesizes <- ccod.lang.complete %>%
 ccod.lang.summary1a <- ccod.lang.complete %>%
   group_by(record_id) %>%
   select(-n_nontbi:-Group) %>%
-  summarise_all(sum) %>%
+  summarise_at(vars(`Australian English`:`Swedish`), funs(sum(., na.rm = TRUE))) %>%
   left_join(ccod.lang.samplesizes) %>%
   select(record_id, total_n, everything())
 
@@ -87,13 +87,13 @@ ccod.lang.summary2d <- ccod.lang.summary2 %>%
   select(-total_n) %>%
   gather(Language, n, -record_id) %>%
   filter(Language == "English") %>%
-  filter(!is.na(n)) %>%
+  filter(n != 0.000) %>%
   arrange(desc(n))
 
 ccod.lang.summary3 <- ccod.lang.summary2 %>%
   select(-record_id, -total_n) %>%
   gather(Language, n) %>%
-  filter(!is.na(n)) %>%
+  filter(n != 0.000) %>%
   group_by(Language) %>%
   summarise(count = n()) %>%
   arrange(desc(count))
@@ -101,7 +101,7 @@ ccod.lang.summary3 <- ccod.lang.summary2 %>%
 ccod.lang.summary4 <- ccod.lang.summary2 %>%
   select(-total_n) %>%
   gather(Language, n, -record_id) %>%
-  filter(!is.na(n)) %>%
+  filter(n != 0.000) %>%
   group_by(record_id) %>%
   summarise(count = n()) %>%
   filter(count > 1) %>%
@@ -110,7 +110,7 @@ ccod.lang.summary4 <- ccod.lang.summary2 %>%
 ccod.lang.summary5 <- ccod.lang.summary1a %>%
   select(-total_n) %>%
   gather(Language, n, -record_id) %>%
-  filter(!is.na(n)) %>%
+  filter(n != 0.000) %>%
   group_by(record_id) %>%
   summarise(count = n()) %>%
   filter(count == 1) %>%
@@ -123,9 +123,11 @@ lang.table <- ccod.lang.summary2 %>%
   select(-pub_year:-pub_journal, -pub_doi) %>%
   select(record_id, pub_apa, everything()) %>%
   gather(Lang, n, -record_id, -pub_apa, -total_n) %>%
-  filter(!is.na(n)) %>%
+  filter(n != 0.000) %>%
+  arrange(desc(n)) %>%
+  mutate(n = round(n, 2)) %>% 
   unite(Language, Lang, n, sep = ", ") %>%
-  arrange(record_id)
+  arrange(pub_apa)
 
 write_csv(lang.table, 
           path = "C:/Users/adamraikes/Documents/GitHub/CCOD/Tables/Language.csv")
