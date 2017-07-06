@@ -46,12 +46,14 @@ ccod.origin.complete <- bind_rows(ccod.origin.nontbi, ccod.origin.mtbi,
   spread(Origin, participants)
 
 #### Summarise race/ethnicity/country of origin numbers ####
+# Get total sample size for each study
 ccod.origin.samplesizes <- ccod.origin.complete %>%
   select(record_id:n_total) %>%
   mutate(total_n = ifelse(!is.na(n_total), n_total, rowSums(.[2:6], na.rm = TRUE))) %>%
   select(record_id, total_n) %>%
   distinct()
 
+# Compute total number of participants in each race/ethnicity/country group per study
 ccod.origin.summary1a <- ccod.origin.complete %>%
   group_by(record_id) %>% 
   select(-n_nontbi:-Group) %>%
@@ -59,6 +61,7 @@ ccod.origin.summary1a <- ccod.origin.complete %>%
   left_join(ccod.origin.samplesizes) %>%
   select(record_id, total_n, everything())
 
+# Compute race/ethnicity/country groups as percentage of all participants
 ccod.origin.summary1b <- ccod.origin.summary1a %>%
   ungroup() %>%
   replace(is.na(.), 0) %>%
@@ -68,6 +71,12 @@ ccod.origin.summary1b <- ccod.origin.summary1a %>%
   arrange(desc(n)) %>%
   mutate(proportion = round(n/sum(ccod.origin.samplesizes$total_n)*100, 3))
 
+# Compute race/ethncity/country groups as percentage of participants per study
+ccod.origin.summary1c <- ccod.origin.summary1a %>%
+  group_by(record_id) %>%
+  mutate_at(vars(Aboriginal:Zimbabwean), funs(round((./total_n)*100, 3)))
+
+#### Assess Race/Ethnicity ####
 # Separate race/ethnicity from country of origin
 col.labels <- colnames(ccod.origin.summary1a)
 coo.labels <- c("Australia or New Zealand", "Brazil", "Canada", "Cuba", "Dominican Republic",
@@ -79,6 +88,7 @@ coo.labels <- c("Australia or New Zealand", "Brazil", "Canada", "Cuba", "Dominic
 origin.labels <- setdiff(col.labels, coo.labels)
 coo.indices <- match(coo.labels, col.labels)
 
+# Summarise just race/ethnicity
 ccod.origin.summary2 <- ccod.origin.summary1a %>%
   select(origin.labels) %>%
   group_by(record_id) %>%
@@ -94,6 +104,7 @@ ccod.origin.summary2b <- ccod.origin.summary2 %>%
 ccod.origin.samplesizes.race <- ccod.origin.samplesizes %>%
   filter(record_id %in% ccod.origin.summary2b$record_id)
 
+# Compute race/ethnicity as percentage of all participants **without** country of origin
 ccod.origin.summary2c <- ccod.origin.summary2 %>%
   ungroup() %>%
   select(-record_id, -total_n) %>%
@@ -102,18 +113,21 @@ ccod.origin.summary2c <- ccod.origin.summary2 %>%
   arrange(desc(n)) %>%
   mutate(proportion = round(n/sum(ccod.origin.samplesizes.race$total_n)*100, 3))
 
+# Compute race/ethnicity as percentage per study **without** country of origin
+# Filter for studies with at least 50% in one group
 ccod.origin.summary2d <- ccod.origin.summary2 %>%
   group_by(record_id, total_n) %>%
   summarise_all(sum) %>%
   mutate_at(vars(Aboriginal:Zimbabwean), funs(round((./total_n)*100, 3))) %>%
   select(-total_n) %>%
   gather(Origin, n, -record_id) %>%
-  filter(n >= 70) %>%
+  filter(n >= 50) %>%
   group_by(Origin) %>%
   summarise(count = n()) %>%
   arrange(desc(count))
 
 #### Assess country of origin ####
+# Separate out only countries of origin
 ccod.origin.summary3 <- ccod.origin.summary1a %>%
   select(record_id, total_n, coo.labels) %>%
   group_by(record_id) %>%
@@ -131,6 +145,8 @@ ccod.origin.summary3b %>% filter(record_id %in% ccod.origin.summary2b$record_id)
 ccod.origin.samplesizes.coo <- ccod.origin.samplesizes %>%
   filter(record_id %in% ccod.origin.summary3b$record_id)
 
+# Compute participants per country as percentage of all participants **without
+# respect to race/ethnicity**
 ccod.origin.summary3c <- ccod.origin.summary3 %>%
   ungroup() %>%
   select(-record_id, -total_n) %>%
@@ -139,6 +155,9 @@ ccod.origin.summary3c <- ccod.origin.summary3 %>%
   arrange(desc(n)) %>%
   mutate(proportion = round(n/sum(ccod.origin.samplesizes.coo$total_n)*100, 3))
 
+# Compute participants in each country for each study as a percentage **without
+# respect to race/ethnicity**. Filter for studies with at least 50% of
+# participants haling from one country.
 ccod.origin.summary3d <- ccod.origin.summary3 %>%
   group_by(record_id, total_n) %>%
   summarise_all(sum) %>%
@@ -149,6 +168,20 @@ ccod.origin.summary3d <- ccod.origin.summary3 %>%
   group_by(Origin) %>%
   summarise(count = n()) %>%
   arrange(desc(count))
+
+#### Write table ####
+origin.table <- ccod.origin.summary1c %>%
+  ungroup() %>%
+  left_join(ccod.articleinfo) %>%
+  select(-pub_year:-pub_journal, -pub_doi) %>%
+  select(record_id, pub_apa, everything()) %>%
+  gather(Orig, n, -record_id, -pub_apa, -total_n) %>%
+  filter(!is.na(n)) %>%
+  unite(Origin, Orig, n, sep = ", ") %>%
+  arrange(record_id)
+
+write_csv(origin.table, 
+          path = "C:/Users/adamraikes/Documents/GitHub/CCOD/Tables/Origin.csv")
 
 
 

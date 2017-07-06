@@ -78,10 +78,10 @@ ccod.lang.summary2b <- ccod.lang.summary2  %>%
   gather(Language, n, -record_id) %>%
   filter(n >= 75.000)
 
-ccod.lang.summary2c <- ccod.lang.summary2b %>%
-  filter(n == 100.000) %>%
-  group_by(Language) %>%
-  summarise(count = n())
+ccod.lang.summary2c <- ccod.lang.summary2  %>%
+  select(-total_n) %>%
+  gather(Language, n, -record_id) %>%
+  filter(n > 99.999)
 
 ccod.lang.summary2d <- ccod.lang.summary2 %>%
   select(-total_n) %>%
@@ -98,7 +98,7 @@ ccod.lang.summary3 <- ccod.lang.summary2 %>%
   summarise(count = n()) %>%
   arrange(desc(count))
 
-ccod.lang.summary4 <- ccod.lang.summary1a %>%
+ccod.lang.summary4 <- ccod.lang.summary2 %>%
   select(-total_n) %>%
   gather(Language, n, -record_id) %>%
   filter(!is.na(n)) %>%
@@ -107,4 +107,26 @@ ccod.lang.summary4 <- ccod.lang.summary1a %>%
   filter(count > 1) %>%
   arrange(desc(count))
 
+ccod.lang.summary5 <- ccod.lang.summary1a %>%
+  select(-total_n) %>%
+  gather(Language, n, -record_id) %>%
+  filter(!is.na(n)) %>%
+  group_by(record_id) %>%
+  summarise(count = n()) %>%
+  filter(count == 1) %>%
+  arrange(desc(count))
+
+#### Write table ####
+lang.table <- ccod.lang.summary2 %>%
+  ungroup() %>%
+  left_join(ccod.articleinfo) %>%
+  select(-pub_year:-pub_journal, -pub_doi) %>%
+  select(record_id, pub_apa, everything()) %>%
+  gather(Lang, n, -record_id, -pub_apa, -total_n) %>%
+  filter(!is.na(n)) %>%
+  unite(Language, Lang, n, sep = ", ") %>%
+  arrange(record_id)
+
+write_csv(lang.table, 
+          path = "C:/Users/adamraikes/Documents/GitHub/CCOD/Tables/Language.csv")
   
