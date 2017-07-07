@@ -36,7 +36,7 @@ ditch_the_axes <- theme(
   axis.title = element_blank()
 )
 
-ggplot() + 
+country.map <- ggplot() + 
   geom_polygon(data = world.map, aes(x=long, 
                                      y = lat, 
                                      group = group,
@@ -46,3 +46,6 @@ ggplot() +
   scale_fill_gradient(name = "Number of\npublications",
                       trans = "log10") +
   ditch_the_axes
+
+ggsave("./Plots/World Map.svg", dpi = 1000)
+

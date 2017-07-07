@@ -26,7 +26,8 @@ bind_rows(ccod.lang, ccod.origin) %>%
 ccod.demographic.analyses <- bind_rows(ccod.lang, ccod.origin) %>%
   select(record_id, origin_analysis, lang_analysis) %>%
   distinct() %>%
-  filter(origin_analysis == "Yes" | lang_analysis == "Yes") 
+  filter(origin_analysis == "Yes" | lang_analysis == "Yes") %>%
+  distinct(record_id)
 
 ccod.origin.analyses <- bind_rows(ccod.lang, ccod.origin) %>%
   select(record_id, origin_analysis, lang_analysis) %>%

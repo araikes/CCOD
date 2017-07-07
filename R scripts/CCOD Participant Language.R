@@ -65,31 +65,42 @@ ccod.lang.summary1b <- ccod.lang.summary1a %>%
   replace(is.na(.), 0) %>%
   select(-record_id, -total_n) %>%
   summarise_all(sum) %>%
-  gather(lang, n) %>%
+  gather(Language, n) %>%
   arrange(desc(n)) %>%
+  filter(n != 0.000) %>%
   mutate(proportion = round(n/sum(ccod.lang.samplesizes$total_n)*100, 3))
 
 ccod.lang.summary2 <- ccod.lang.summary1a %>%
   ungroup() %>%
   mutate_at(vars(`Australian English`:Swedish), funs(round((./total_n)*100, 3)))
 
+# Majority language
 ccod.lang.summary2b <- ccod.lang.summary2  %>%
   select(-total_n) %>%
   gather(Language, n, -record_id) %>%
-  filter(n >= 75.000)
+  filter(n >= 50.000) %>%
+  group_by(Language) %>%
+  summarise(count = n())
 
+# Only language
 ccod.lang.summary2c <- ccod.lang.summary2  %>%
   select(-total_n) %>%
   gather(Language, n, -record_id) %>%
-  filter(n > 99.999)
+  filter(n > 99.999) %>%
+  group_by(Language) %>%
+  summarise(count = n())
 
+# English as Majority/Minority
 ccod.lang.summary2d <- ccod.lang.summary2 %>%
   select(-total_n) %>%
   gather(Language, n, -record_id) %>%
   filter(Language == "English") %>%
   filter(n != 0.000) %>%
-  arrange(desc(n))
+  mutate(over50 = ifelse(n > 50, "Majority", "Minority")) %>%
+  group_by(over50) %>%
+  summarise(count = n())
 
+# Total number of articles reporting the language
 ccod.lang.summary3 <- ccod.lang.summary2 %>%
   select(-record_id, -total_n) %>%
   gather(Language, n) %>%
@@ -98,6 +109,7 @@ ccod.lang.summary3 <- ccod.lang.summary2 %>%
   summarise(count = n()) %>%
   arrange(desc(count))
 
+# Articles reporting multiple languages
 ccod.lang.summary4 <- ccod.lang.summary2 %>%
   select(-total_n) %>%
   gather(Language, n, -record_id) %>%
@@ -107,6 +119,7 @@ ccod.lang.summary4 <- ccod.lang.summary2 %>%
   filter(count > 1) %>%
   arrange(desc(count))
 
+# Articles reporting single language
 ccod.lang.summary5 <- ccod.lang.summary1a %>%
   select(-total_n) %>%
   gather(Language, n, -record_id) %>%
@@ -116,7 +129,7 @@ ccod.lang.summary5 <- ccod.lang.summary1a %>%
   filter(count == 1) %>%
   arrange(desc(count))
 
-#### Write table ####
+#### Write tables ####
 lang.table <- ccod.lang.summary2 %>%
   ungroup() %>%
   left_join(ccod.articleinfo) %>%
@@ -129,6 +142,13 @@ lang.table <- ccod.lang.summary2 %>%
   unite(Language, Lang, n, sep = ", ") %>%
   arrange(pub_apa)
 
+lang.distribution.table <- left_join(ccod.lang.summary1b, ccod.lang.summary3) %>%
+  left_join(ccod.lang.summary2b, by = c("Language")) %>%
+  left_join(ccod.lang.summary2c, by = c("Language"))
+
 write_csv(lang.table, 
           path = "C:/Users/adamraikes/Documents/GitHub/CCOD/Tables/Language.csv")
+
+write_csv(lang.distribution.table, 
+          path = "C:/Users/adamraikes/Documents/GitHub/CCOD/Tables/Language Distribution.csv")
   
