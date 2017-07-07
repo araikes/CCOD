@@ -15,7 +15,7 @@ source("R scripts/CCOD Function Definitions.R")
 # run and then removed so that it is not persistently available.
 
 redcap.uri <- "https://redcap.cehs.usu.edu/api/"
-redcap.key <- "795C0CFA3E0445A3AE2C876F37ADC1EA"
+redcap.key <- ""
 ccod.database <- redcapImport(uri = redcap.uri, key = redcap.key)
 
 rm(redcap.key)
