@@ -196,14 +196,18 @@ ccod.origin.summary3d <- ccod.origin.summary3 %>%
 origin.table <- ccod.origin.summary1c %>%
   ungroup() %>%
   left_join(ccod.articleinfo) %>%
-  select(-pub_year:-pub_journal, -pub_doi) %>%
-  select(record_id, pub_apa, everything()) %>%
-  gather(Orig, n, -record_id, -pub_apa, -total_n) %>%
+  select(-pub_author:-pub_journal, -pub_doi) %>%
+  select(record_id, pub_apa, pub_year, pop_country, everything()) %>%
+  gather(Orig, n, -record_id, -pub_apa, -pub_year, -pop_country, -total_n) %>%
   filter(n != 0.000) %>%
   arrange(desc(n)) %>%
   mutate(n = round(n, 2)) %>% 
   unite(Origin, Orig, n, sep = ", ") %>%
   arrange(pub_apa, record_id)
+
+origin.table.countryyear <- origin.table %>%
+  select(record_id:pop_country) %>%
+  distinct()
 
 origin.distribution.table <- left_join(ccod.origin.summary2c, ccod.origin.summary2a) %>%
   left_join(ccod.origin.summary2d, by = "Origin")
@@ -220,6 +224,9 @@ write_csv(origin.distribution.table,
 
 write_csv(coo.distribution.table,
           path = "C:/Users/adamraikes/Documents/GitHub/CCOD/Tables/Country Distribution.csv")
+
+write_csv(origin.table.countryyear,
+          path = "./Tables/Origin Country and Year.csv")
 
 
   

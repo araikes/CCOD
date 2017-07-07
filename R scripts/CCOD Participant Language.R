@@ -133,14 +133,18 @@ ccod.lang.summary5 <- ccod.lang.summary1a %>%
 lang.table <- ccod.lang.summary2 %>%
   ungroup() %>%
   left_join(ccod.articleinfo) %>%
-  select(-pub_year:-pub_journal, -pub_doi) %>%
-  select(record_id, pub_apa, everything()) %>%
-  gather(Lang, n, -record_id, -pub_apa, -total_n) %>%
+  select(-pub_author:-pub_journal, -pub_doi) %>%
+  select(record_id, pub_apa, pub_year, pop_country, everything()) %>%
+  gather(Lang, n, -record_id, -pub_apa, -pub_year, -pop_country, -total_n) %>%
   filter(n != 0.000) %>%
   arrange(desc(n)) %>%
   mutate(n = round(n, 2)) %>% 
   unite(Language, Lang, n, sep = ", ") %>%
   arrange(pub_apa)
+
+lang.table.countryyear <- lang.table %>%
+  select(record_id:pop_country) %>%
+  distinct()
 
 lang.distribution.table <- left_join(ccod.lang.summary1b, ccod.lang.summary3) %>%
   left_join(ccod.lang.summary2b, by = c("Language")) %>%
@@ -151,4 +155,8 @@ write_csv(lang.table,
 
 write_csv(lang.distribution.table, 
           path = "C:/Users/adamraikes/Documents/GitHub/CCOD/Tables/Language Distribution.csv")
+
+write_csv(lang.table.countryyear,
+          path = "./Tables/CSVs from R/Language Country and Year.csv")
+
   
