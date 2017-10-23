@@ -11,7 +11,8 @@
 
 ccod.origin <- ccod.included %>%
   filter(origin_reported == "Yes") %>%
-  select(record_id:pub_title, n_nontbi:n_total, origin_analysis, n_orig_nontbi_perc:n_orig_totsamp_zimb) %>%
+  select(record_id:pub_title, n_nontbi:n_total, origin_analysis, 
+         n_orig_nontbi_perc:n_orig_totsamp_zimb) %>%
   select(-contains("complete"))
 
 #### Convert to long format for manipulation ####
