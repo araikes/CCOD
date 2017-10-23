@@ -12,18 +12,9 @@ library(mapdata)
 
 #### Summarise article density by country ####
 ccod.countries <- ccod.included %>%
-<<<<<<< HEAD
   dplyr::group_by(pop_country) %>% 
   dplyr::summarise(count = n()) %>% 
-  dplyr::arrange(desc(count)) %>%
-  dplyr::ungroup() %>%
-  dplyr::mutate(proportion = count/sum(count)) %>%
-  dplyr::filter(pop_country != "Unknown or Unreported" & pop_country != "Multiple countries")
-=======
-  group_by(pop_country) %>% 
-  summarise(count = n()) %>% 
-  arrange(desc(count))
->>>>>>> develop
+  dplyr::arrange(desc(count))
 
 #### Load world map ####
 world.map <- map_data("world")

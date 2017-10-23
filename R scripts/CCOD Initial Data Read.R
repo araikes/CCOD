@@ -15,7 +15,7 @@ source("R scripts/CCOD Function Definitions.R")
 # run and then removed so that it is not persistently available.
 
 redcap.uri <- "https://redcap.cehs.usu.edu/api/"
-redcap.key <- ""
+redcap.key <- "795C0CFA3E0445A3AE2C876F37ADC1EA"
 ccod.database <- redcapImport(uri = redcap.uri, key = redcap.key)
 
 rm(redcap.key)
@@ -26,10 +26,12 @@ library(stringr)
 
 #### Filter database for included articles ####
 ccod.included <- ccod.database %>%
-  filter(text_scrn_include == "Yes - include" | text_scrn_include == "Kindof - no tests specific outcome??")
+  select(record_id:cognitive_tests_complete) %>%
+  filter(text_scrn_include == "Yes - include" | 
+           text_scrn_include == "Kindof - no tests specific outcome??")
 
 ccod.articleinfo <- ccod.included %>%
-  select(record_id:pub_doi)
+  select(record_id:pub_doi, pop_country)
 
 #### Evaluate for issues of critical missingness ####
 ccod.included %>%
@@ -46,4 +48,12 @@ labels <- data.frame(var = colnames(ccod.included), label = get_label(ccod.inclu
   mutate(aesthetic.label = str_wrap(label, width = var.width)) %>%
   select(-label)
 rownames(labels) <- c()
+
+#### Write database for sharing ####
+saveRDS(ccod.included, 
+        file = "./Data files/Race and Ethnicity Review.Rdata")
+write_csv(ccod.included,
+          path = "./Data files/Race and Ethnicity Review.csv")
+sjlabelled::write_spss(ccod.included,
+                       path = "./Data files/Race and Ethnicity Review.sav")
 
