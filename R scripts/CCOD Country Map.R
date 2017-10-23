@@ -12,9 +12,9 @@ library(mapdata)
 
 #### Summarise article density by country ####
 ccod.countries <- ccod.included %>%
-  group_by(pop_country) %>% 
-  summarise(count = n()) %>% 
-  arrange(desc(count))
+  dplyr::group_by(pop_country) %>% 
+  dplyr::summarise(count = n()) %>% 
+  dplyr::arrange(desc(count))
 
 #### Load world map ####
 world.map <- map_data("world")
@@ -48,4 +48,3 @@ country.map <- ggplot() +
   ditch_the_axes
 
 ggsave("./Plots/World Map.svg", dpi = 1000)
-

@@ -6,6 +6,21 @@
 # Initial Date: 06/15/2017
 
 # Identify the number of sources reporting race/ethnicity/CoO or language
+<<<<<<< HEAD
+dplyr::bind_rows(ccod.lang, ccod.origin) %>% 
+  dplyr::select(record_id) %>% 
+  dplyr::distinct(record_id) %>% 
+  dplyr::summarise(count = n()) 
+
+# Identify the number of sources reporting both race/ethncitiy/CoO and language
+dplyr::bind_rows(ccod.lang, ccod.origin) %>%
+  dplyr::select(record_id) %>%
+  dplyr::group_by(record_id) %>%
+  dplyr::summarise(count = n()) %>%
+  dplyr::filter(count > 1) %>%
+  dplyr::ungroup() %>%
+  dplyr::summarise(count = n())
+=======
 bind_rows(ccod.lang, ccod.origin) %>% 
   select(record_id) %>% 
   distinct(record_id) %>% 
@@ -21,6 +36,7 @@ bind_rows(ccod.lang, ccod.origin) %>%
   ungroup() %>%
   left_join(ccod.articleinfo) %>%
   View()
+>>>>>>> develop
 
 #### Race/Language analyses ####
 ccod.demographic.analyses <- bind_rows(ccod.lang, ccod.origin) %>%

@@ -53,7 +53,12 @@ rownames(labels) <- c()
 saveRDS(ccod.included, 
         file = "./Data files/Race and Ethnicity Review.Rdata")
 write_csv(ccod.included,
+
           path = "./Data files/Race and Ethnicity Review.Rdata")
 sjlabelled::write_spss(ccod.included,
                        path = "./Data files/Race and Ethnicity Review.Rdata")
+=======
+          path = "./Data files/Race and Ethnicity Review.csv")
+sjlabelled::write_spss(ccod.included,
+                       path = "./Data files/Race and Ethnicity Review.sav")
 
