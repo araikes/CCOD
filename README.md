@@ -1,4 +1,6 @@
 # CCOD
+[![DOI](https://zenodo.org/badge/93772762.svg)](https://zenodo.org/badge/latestdoi/93772762)
+
 Comprehensive Concussion Outcomes Database
 
 The purpose of the Comprehensive Concussion Outcomes Database is curate a database of concussion/mild traumatic brain injury-related outcomes for facilitating systematic reviews and meta-analyses.
