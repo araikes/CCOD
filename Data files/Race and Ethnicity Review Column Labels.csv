@@ -1,0 +1,845 @@
+var,aesthetic.label
+record_id,Record ID
+redcap_event_name,
+pub_year,Year
+pub_author,Authors
+pub_title,Title of Article
+pub_journal,"Journal article is published
+in"
+pub_apa,APA in-text citation
+pub_doi,DOI
+entrypoint_complete,Complete?
+scrn_abst_include,Include?
+title_abstract_screening_complete,Complete?
+text_scrn_include,Include?
+textscrn_include_notes,"Enter any notes regarding
+justification for inclusion/
+exclusion"
+full_text_screening_complete,Complete?
+first_inclusion,"Indicate the study of first
+inclusion for this article."
+pop_country,Country
+outcome_types___1,"Indicate the types of outcomes
+reported in this article.
+(choice=Cognitive)"
+outcome_types___2,"Indicate the types of outcomes
+reported in this article.
+(choice=Motor (including
+balance/posture, oculomotor
+dexterity))"
+outcome_types___3,"Indicate the types of outcomes
+reported in this article.
+(choice=Sleep (subjective or
+objective measurements))"
+outcome_types___4,"Indicate the types of outcomes
+reported in this article.
+(choice=Symptoms)"
+n_nontbi,"Total Number participants
+with: non-TBI"
+n_tbi_mild,"Total Number of participants
+with: mild TBI or concussion"
+n_tbi_mod,"Total Number of participants
+with: moderate TBI"
+n_tbi_sev,"Total Number of participants
+with: severeTBI"
+n_tbi_modsev,"Total Number of participants
+with: moderate to severeTBI"
+n_total,"Total number of participants.
+Only include a response
+in this field if no other
+grouping of participants is
+sensible."
+origin_reported,"Do the authors include any
+breakdown of the sample
+regarding race, ethnicity, or
+country of origin"
+origin_by_group,"Is the breakdown of race,
+ethnicity or country of origin
+presented for each participant
+group separately or for all
+participants regardless of
+group?"
+origin_analysis,"Are any study findings
+stratified, or statistically
+analyzed, with respect to
+race, ethnicity, or country of
+origin?"
+lang_reported,"Do the authors include
+any breakdown of the
+sample regarding the
+primary language(s) of the
+participants"
+lang_by_group,"Is the breakdown of language
+presented for each participant
+group separately or for all
+participants regardless of
+group?"
+lang_analysis,"Are any study findings
+stratified, or statistically
+analyzed, with respect to
+language?"
+summary_complete,Complete?
+n_orig_nontbi_perc,"Are you reporting numbers of
+participants as whole numbers
+or a percentage of the group?
+If percentage, please report
+as values between 0-100. Do
+not include the ""%"" symbol."
+n_orig_nontbi_aboriginal,Aboriginal
+n_orig_nontbi_afam,African-American
+n_orig_nontbi_afambl,African-American/Black
+n_orig_nontbi_afamasianother,"African American, Asian, or
+Other"
+n_orig_nontbi_afcarib,African or Caribbean
+n_orig_nontbi_american,American
+n_orig_nontbi_amindian,American Indian
+n_orig_nontbi_aian,"American Indian or Alaskan
+Native"
+n_orig_nontbi_asian,Asian
+n_orig_nontbi_asam,Asian American
+n_orig_nontbi_asianeastindian,"Asian, East Indian, Other
+Asian"
+n_orig_nontbi_asind,Asian Indian
+n_orig_nontbi_asianpacislander,Asian or Pacific Islander
+n_orig_nontbi_aus,Australian
+n_orig_nontbi_ausnz,Australia or New Zealand
+n_orig_nontbi_biracial,Biracial
+n_orig_nontbi_bimultracial,Biracial or multiracial
+n_orig_nontbi_black,Black
+n_orig_nontbi_blackafam,Black or African American
+n_orig_nontbi_brazil,Brazil
+n_orig_nontbi_canada,Canada
+n_orig_nontbi_caucasian,Caucasian
+n_orig_nontbi_caucwhite,Caucasian/White
+n_orig_nontbi_chinese,Chinese
+n_orig_nontbi_cuba,Cuba
+n_orig_nontbi_domrep,Dominican Republic
+n_orig_nontbi_dutch,Dutch
+n_orig_nontbi_eastind,East Indian
+n_orig_nontbi_egypt,Egypt
+n_orig_nontbi_engeur,English or European
+n_orig_nontbi_ethminority,Ethnic Minority
+n_orig_nontbi_euram,European American
+n_orig_nontbi_filipino,Filipino
+n_orig_nontbi_finnish,Finnish
+n_orig_nontbi_firstnations,First Nations
+n_orig_nontbi_hispanic,Hispanic
+n_orig_nontbi_hispam,Hispanic American
+n_orig_nontbi_hisplatino,Hispanic or Latino
+n_orig_nontbi_india,India
+n_orig_nontbi_indian,Indian
+n_orig_nontbi_indig,Indigenous
+n_orig_nontbi_indonesia,Indonesia
+n_orig_nontbi_irish,Irish
+n_orig_nontbi_latinam,Latin American
+n_orig_nontbi_latino,Latino
+n_orig_nontbi_latinomixed,Latino or Mixed
+n_orig_nontbi_lebanon,Lebanon
+n_orig_nontbi_malay,Malay
+n_orig_nontbi_maori,Maori
+n_orig_nontbi_mexico,Mexico
+n_orig_nontbi_minority,Minority
+n_orig_nontbi_missing,Missing
+n_orig_nontbi_mixedeth,Mixed ethnicities
+n_orig_nontbi_mixedrace,Mixed racial background
+n_orig_nontbi_mixedmult,Mixed or multiple
+n_orig_nontbi_multiracial,Multiracial
+n_orig_nontbi_multicultural,Multicultural
+n_orig_nontbi_multiethnic,Multi-ethnic
+n_orig_nontbi_nativeam,Native American
+n_orig_nontbi_naan,"Native American or Alaskan
+Native"
+n_orig_nontbi_nathawpacislander,"Native Hawaiian or Pacific
+Islander"
+n_orig_nontbi_negro,Negro
+n_orig_nontbi_netherlands,Netherlands
+n_orig_nontbi_nzeuro,New Zealand European
+n_orig_nontbi_nicaragua,Nicaragua
+n_orig_nontbi_nonblack,Non-Black
+n_orig_nontbi_noncauc,Non-Caucasian
+n_orig_nontbi_nonhisp,Non-Hispanic
+n_orig_nontbi_norway,Norway
+n_orig_nontbi_norscand,Norweigan or Scandinavian
+n_orig_nontbi_other,Other
+n_orig_nontbi_otherunkn,Other/Unknown
+n_orig_nontbi_othereuro,Other European
+n_orig_nontbi_pacific,Pacific
+n_orig_nontbi_pacislanders,Pacific Islander
+n_orig_nontbi_polyam,Polynesian American
+n_orig_nontbi_polymalay,Polynesian Malay
+n_orig_nontbi_puertorico,Puerto Rico
+n_orig_nontbi_scandiv,Scandinavian
+n_orig_nontbi_singapore,Singapore
+n_orig_nontbi_southafrican,South African
+n_orig_nontbi_southamerican,South America
+n_orig_nontbi_spain,Spain
+n_orig_nontbi_unknown,Unknown
+n_orig_nontbi_undecleth,Undeclared ethnicity
+n_orig_nontbi_unrep,Unreported
+n_orig_nontbi_unspec,Unspecified
+n_orig_nontbi_uk,United Kingdom
+n_orig_nontbi_unitedstates,United States
+n_orig_nontbi_usenglspan,"US (English or Spanish
+Speaking)"
+n_orig_nontbi_uscanada,US or Canada
+n_orig_nontbi_usengl,"US - English as primary
+language"
+n_orig_nontbi_usspanish,"US - Spanish as primary
+language"
+n_orig_nontbi_venezuela,Venezuela
+n_orig_nontbi_white,White
+n_orig_nontbi_white_euroam,White or European American
+n_orig_nontbi_white_nonhisp,White (non-Hispanic)
+n_orig_nontbi_white_nonlatino,White (non-Latino)
+n_orig_nontbi_whitelatino,White Latino
+n_orig_nontbi_zimb,Zimbabwean
+nontbi_group_origin_complete,Complete?
+n_orig_mtbi_perc,"Are you reporting numbers of
+participants as whole numbers
+or a percentage of the group?
+If percentage, please report
+as values between 0-100. Do
+not include the ""%"" symbol."
+n_orig_mtbi_aboriginal,Aboriginal
+n_orig_mtbi_afam,African-American
+n_orig_mtbi_afambl,African-American/Black
+n_orig_mtbi_afamasianother,"African American, Asian, or
+Other"
+n_orig_mtbi_afcarib,African or Caribbean
+n_orig_mtbi_american,American
+n_orig_mtbi_amindian,American Indian
+n_orig_mtbi_aian,"American Indian or Alaskan
+Native"
+n_orig_mtbi_asian,Asian
+n_orig_mtbi_asam,Asian American
+n_orig_mtbi_asianeastindian,"Asian, East Indian, Other
+Asian"
+n_orig_mtbi_asind,Asian Indian
+n_orig_mtbi_asianpacislander,Asian or Pacific Islander
+n_orig_mtbi_aus,Australian
+n_orig_mtbi_ausnz,Australia or New Zealand
+n_orig_mtbi_biracial,Biracial
+n_orig_mtbi_bimultracial,Biracial or multiracial
+n_orig_mtbi_black,Black
+n_orig_mtbi_blackafam,Black or African American
+n_orig_mtbi_brazil,Brazil
+n_orig_mtbi_canada,Canada
+n_orig_mtbi_caucasian,Caucasian
+n_orig_mtbi_caucwhite,Caucasian/White
+n_orig_mtbi_chinese,Chinese
+n_orig_mtbi_cuba,Cuba
+n_orig_mtbi_domrep,Dominican Republic
+n_orig_mtbi_dutch,Dutch
+n_orig_mtbi_eastind,East Indian
+n_orig_mtbi_egypt,Egypt
+n_orig_mtbi_engeur,English or European
+n_orig_mtbi_ethminority,Ethnic Minority
+n_orig_mtbi_euram,European American
+n_orig_mtbi_filipino,Filipino
+n_orig_mtbi_finnish,Finnish
+n_orig_mtbi_firstnations,First Nations
+n_orig_mtbi_hispanic,Hispanic
+n_orig_mtbi_hispam,Hispanic American
+n_orig_mtbi_hisplatino,Hispanic or Latino
+n_orig_mtbi_india,India
+n_orig_mtbi_indian,Indian
+n_orig_mtbi_indig,Indigenous
+n_orig_mtbi_indonesia,Indonesia
+n_orig_mtbi_irish,Irish
+n_orig_mtbi_latinam,Latin American
+n_orig_mtbi_latino,Latino
+n_orig_mtbi_latinomixed,Latino or Mixed
+n_orig_mtbi_lebanon,Lebanon
+n_orig_mtbi_malay,Malay
+n_orig_mtbi_maori,Maori
+n_orig_mtbi_mexico,Mexico
+n_orig_mtbi_minority,Minority
+n_orig_mtbi_mixedeth,Mixed ethnicities
+n_orig_mtbi_mixedrace,Mixed racial background
+n_orig_mtbi_mixedmult,Mixed or multiple
+n_orig_mtbi_multiracial,Multiracial
+n_orig_mtbi_multicultural,Multicultural
+n_orig_mtbi_multiethnic,Multi-ethnic
+n_orig_mtbi_nativeam,Native American
+n_orig_mtbi_naan,"Native American or Alaskan
+Native"
+n_orig_mtbi_nathawpacislander,"Native Hawaiian or Pacific
+Islander"
+n_orig_mtbi_negro,Negro
+n_orig_mtbi_netherlands,Netherlands
+n_orig_mtbi_nzeuro,New Zealand European
+n_orig_mtbi_nicaragua,Nicaragua
+n_orig_mtbi_nonblack,Non-Black
+n_orig_mtbi_noncauc,Non-Caucasian
+n_orig_mtbi_nonhisp,Non-Hispanic
+n_orig_mtbi_norway,Norway
+n_orig_mtbi_norscand,Norweigan or Scandinavian
+n_orig_mtbi_other,Other
+n_orig_mtbi_otherunkn,Other/Unknown
+n_orig_mtbi_othereuro,Other European
+n_orig_mtbi_pacific,Pacific
+n_orig_mtbi_pacislanders,Pacific Islander
+n_orig_mtbi_polyam,Polynesian American
+n_orig_mtbi_polymalay,Polynesian Malay
+n_orig_mtbi_puertorico,Puerto Rico
+n_orig_mtbi_scandiv,Scandinavian
+n_orig_mtbi_singapore,Singapore
+n_orig_mtbi_southafrican,South African
+n_orig_mtbi_southamerican,South America
+n_orig_mtbi_spain,Spain
+n_orig_mtbi_undecleth,Undeclared ethnicity
+n_orig_mtbi_unknown,Unknown
+n_orig_mtbi_unrep,Unreported
+n_orig_mtbi_unspec,Unspecified
+n_orig_mtbi_uk,United Kingdom
+n_orig_mtbi_unitedstates,United States
+n_orig_mtbi_usenglspan,"US (English or Spanish
+Speaking)"
+n_orig_mtbi_uscanada,US or Canada
+n_orig_mtbi_usengl,"US - English as primary
+language"
+n_orig_mtbi_usspanish,"US - Spanish as primary
+language"
+n_orig_mtbi_venezuela,Venezuela
+n_orig_mtbi_white,White
+n_orig_mtbi_white_euroam,White or European American
+n_orig_mtbi_white_nonhisp,White (non-Hispanic)
+n_orig_mtbi_white_nonlatino,White (non-Latino)
+n_orig_mtbi_whitelatino,White Latino
+n_orig_mtbi_zimb,Zimbabwean
+mtbi_or_concussion_group_origin_complete,Complete?
+n_orig_modtbi_perc,"Are you reporting numbers of
+participants as whole numbers
+or a percentage of the group?
+If percentage, please report
+as values between 0-100. Do
+not include the ""%"" symbol."
+n_orig_modtbi_aboriginal,Aboriginal
+n_orig_modtbi_afam,African-American
+n_orig_modtbi_afamasianother,"African American, Asian, or
+Other"
+n_orig_modtbi_afcarib,African or Caribbean
+n_orig_modtbi_american,American
+n_orig_modtbi_amindian,American Indian
+n_orig_modtbi_aian,"American Indian or Alaskan
+Native"
+n_orig_modtbi_asian,Asian
+n_orig_modtbi_asam,Asian American
+n_orig_modtbi_asianeastindian,"Asian, East Indian, Other
+Asian"
+n_orig_modtbi_asind,Asian Indian
+n_orig_modtbi_asianpacislander,Asian or Pacific Islander
+n_orig_modtbi_aus,Australian
+n_orig_modtbi_ausnz,Australia or New Zealand
+n_orig_modtbi_biracial,Biracial
+n_orig_modtbi_bimultracial,Biracial or multiracial
+n_orig_modtbi_black,Black
+n_orig_modtbi_blackafam,Black or African American
+n_orig_modtbi_brazil,Brazil
+n_orig_modtbi_canada,Canada
+n_orig_modtbi_caucasian,Caucasian
+n_orig_modtbi_chinese,Chinese
+n_orig_modtbi_cuba,Cuba
+n_orig_modtbi_domrep,Dominican Republic
+n_orig_modtbi_dutch,Dutch
+n_orig_modtbi_eastind,East Indian
+n_orig_modtbi_egypt,Egypt
+n_orig_modtbi_engeur,English or European
+n_orig_modtbi_ethminority,Ethnic Minority
+n_orig_modtbi_euram,European American
+n_orig_modtbi_filipino,Filipino
+n_orig_modtbi_finnish,Finnish
+n_orig_modtbi_firstnations,First Nations
+n_orig_modtbi_hispanic,Hispanic
+n_orig_modtbi_hispam,Hispanic American
+n_orig_modtbi_hisplatino,Hispanic or Latino
+n_orig_modtbi_india,India
+n_orig_modtbi_indian,Indian
+n_orig_modtbi_indig,Indigenous
+n_orig_modtbi_indonesia,Indonesia
+n_orig_modtbi_irish,Irish
+n_orig_modtbi_latinam,Latin American
+n_orig_modtbi_latino,Latino
+n_orig_modtbi_latinomixed,Latino or Mixed
+n_orig_modtbi_lebanon,Lebanon
+n_orig_modtbi_malay,Malay
+n_orig_modtbi_maori,Maori
+n_orig_modtbi_mexico,Mexico
+n_orig_modtbi_minority,Minority
+n_orig_modtbi_mixedeth,Mixed ethnicities
+n_orig_modtbi_mixedrace,Mixed racial background
+n_orig_modtbi_mixedmult,Mixed or multiple
+n_orig_modtbi_multiracial,Multiracial
+n_orig_modtbi_multicultural,Multicultural
+n_orig_modtbi_multiethnic,Multi-ethnic
+n_orig_modtbi_nativeam,Native American
+n_orig_modtbi_naan,"Native American or Alaskan
+Native"
+n_orig_modtbi_nathawpacislander,"Native Hawaiian or Pacific
+Islander"
+n_orig_modtbi_negro,Negro
+n_orig_modtbi_netherlands,Netherlands
+n_orig_modtbi_nzeuro,New Zealand European
+n_orig_modtbi_nicaragua,Nicaragua
+n_orig_modtbi_nonblack,Non-Black
+n_orig_modtbi_noncauc,Non-Caucasian
+n_orig_modtbi_nonhisp,Non-Hispanic
+n_orig_modtbi_norway,Norway
+n_orig_modtbi_norscand,Norweigan or Scandinavian
+n_orig_modtbi_other,Other
+n_orig_modtbi_otherunkn,Other/Unknown
+n_orig_modtbi_othereuro,Other European
+n_orig_modtbi_pacific,Pacific
+n_orig_modtbi_pacislanders,Pacific Islander
+n_orig_modtbi_polyam,Polynesian American
+n_orig_modtbi_polymalay,Polynesian Malay
+n_orig_modtbi_puertorico,Puerto Rico
+n_orig_modtbi_scandiv,Scandinavian
+n_orig_modtbi_singapore,Singapore
+n_orig_modtbi_southafrican,South African
+n_orig_modtbi_southamerican,South America
+n_orig_modtbi_spain,Spain
+n_orig_modtbi_undecleth,Undeclared ethnicity
+n_orig_modtbi_unknown,Unknown
+n_orig_modtbi_unrep,Unreported
+n_orig_modtbi_unspec,Unspecified
+n_orig_modtbi_uk,United Kingdom
+n_orig_modtbi_unitedstates,United States
+n_orig_modtbi_usenglspan,"US (English or Spanish
+Speaking)"
+n_orig_modtbi_uscanada,US or Canada
+n_orig_modtbi_usengl,"US - English as primary
+language"
+n_orig_modtbi_usspanish,"US - Spanish as primary
+language"
+n_orig_modtbi_venezuela,Venezuela
+n_orig_modtbi_white,White
+n_orig_modtbi_white_euroam,White or European American
+n_orig_modtbi_white_nonhisp,White (non-Hispanic)
+n_orig_modtbi_white_nonlatino,White (non-Latino)
+n_orig_modtbi_whitelatino,White Latino
+n_orig_modtbi_zimb,Zimbabwean
+moderate_tbi_group_origin_complete,Complete?
+n_orig_stbi_perc,"Are you reporting numbers of
+participants as whole numbers
+or a percentage of the group?
+If percentage, please report
+as values between 0-100. Do
+not include the ""%"" symbol."
+n_orig_stbi_aboriginal,Aboriginal
+n_orig_stbi_afam,African-American
+n_orig_stbi_afamasianother,"African American, Asian, or
+Other"
+n_orig_stbi_afcarib,African or Caribbean
+n_orig_stbi_american,American
+n_orig_stbi_amindian,American Indian
+n_orig_stbi_aian,"American Indian or Alaskan
+Native"
+n_orig_stbi_asian,Asian
+n_orig_stbi_asam,Asian American
+n_orig_stbi_asianeastindian,"Asian, East Indian, Other
+Asian"
+n_orig_stbi_asind,Asian Indian
+n_orig_stbi_asianpacislander,Asian or Pacific Islander
+n_orig_stbi_aus,Australian
+n_orig_stbi_ausnz,Australia or New Zealand
+n_orig_stbi_biracial,Biracial
+n_orig_stbi_bimultracial,Biracial or multiracial
+n_orig_stbi_black,Black
+n_orig_stbi_blackafam,Black or African American
+n_orig_stbi_brazil,Brazil
+n_orig_stbi_canada,Canada
+n_orig_stbi_caucasian,Caucasian
+n_orig_stbi_chinese,Chinese
+n_orig_stbi_cuba,Cuba
+n_orig_stbi_domrep,Dominican Republic
+n_orig_stbi_dutch,Dutch
+n_orig_stbi_eastind,East Indian
+n_orig_stbi_egypt,Egypt
+n_orig_stbi_engeur,English or European
+n_orig_stbi_ethminority,Ethnic Minority
+n_orig_stbi_euram,European American
+n_orig_stbi_filipino,Filipino
+n_orig_stbi_finnish,Finnish
+n_orig_stbi_firstnations,First Nations
+n_orig_stbi_hispanic,Hispanic
+n_orig_stbi_hispam,Hispanic American
+n_orig_stbi_hisplatino,Hispanic or Latino
+n_orig_stbi_india,India
+n_orig_stbi_indian,Indian
+n_orig_stbi_indig,Indigenous
+n_orig_stbi_indonesia,Indonesia
+n_orig_stbi_irish,Irish
+n_orig_stbi_latinam,Latin American
+n_orig_stbi_latino,Latino
+n_orig_stbi_latinomixed,Latino or Mixed
+n_orig_stbi_lebanon,Lebanon
+n_orig_stbi_malay,Malay
+n_orig_stbi_maori,Maori
+n_orig_stbi_mexico,Mexico
+n_orig_stbi_minority,Minority
+n_orig_stbi_mixedeth,Mixed ethnicities
+n_orig_stbi_mixedrace,Mixed racial background
+n_orig_stbi_mixedmult,Mixed or multiple
+n_orig_stbi_multiracial,Multiracial
+n_orig_stbi_multicultural,Multicultural
+n_orig_stbi_multiethnic,Multi-ethnic
+n_orig_stbi_nativeam,Native American
+n_orig_stbi_naan,"Native American or Alaskan
+Native"
+n_orig_stbi_nathawpacislander,"Native Hawaiian or Pacific
+Islander"
+n_orig_stbi_negro,Negro
+n_orig_stbi_netherlands,Netherlands
+n_orig_stbi_nzeuro,New Zealand European
+n_orig_stbi_nicaragua,Nicaragua
+n_orig_stbi_nonblack,Non-Black
+n_orig_stbi_noncauc,Non-Caucasian
+n_orig_stbi_nonhisp,Non-Hispanic
+n_orig_stbi_norway,Norway
+n_orig_stbi_norscand,Norweigan or Scandinavian
+n_orig_stbi_other,Other
+n_orig_stbi_otherunkn,Other/Unknown
+n_orig_stbi_othereuro,Other European
+n_orig_stbi_pacific,Pacific
+n_orig_stbi_pacislanders,Pacific Islander
+n_orig_stbi_polyam,Polynesian American
+n_orig_stbi_polymalay,Polynesian Malay
+n_orig_stbi_puertorico,Puerto Rico
+n_orig_stbi_scandiv,Scandinavian
+n_orig_stbi_singapore,Singapore
+n_orig_stbi_southafrican,South African
+n_orig_stbi_southamerican,South America
+n_orig_stbi_spain,Spain
+n_orig_stbi_undecleth,Undeclared ethnicity
+n_orig_stbi_unknown,Unknown
+n_orig_stbi_unrep,Unreported
+n_orig_stbi_unspec,Unspecified
+n_orig_stbi_uk,United Kingdom
+n_orig_stbi_unitedstates,United States
+n_orig_stbi_usenglspan,"US (English or Spanish
+Speaking)"
+n_orig_stbi_uscanada,US or Canada
+n_orig_stbi_usengl,"US - English as primary
+language"
+n_orig_stbi_usspanish,"US - Spanish as primary
+language"
+n_orig_stbi_venezuela,Venezuela
+n_orig_stbi_white,White
+n_orig_stbi_white_euroam,White or European American
+n_orig_stbi_white_nonhisp,White (non-Hispanic)
+n_orig_stbi_white_nonlatino,White (non-Latino)
+n_orig_stbi_whitelatino,White Latino
+n_orig_stbi_zimb,Zimbabwean
+severe_tbi_group_origin_complete,Complete?
+n_orig_totsamp_perc,"Are you reporting numbers of
+participants as whole numbers
+or a percentage of the group?
+If percentage, please report
+as values between 0-100. Do
+not include the ""%"" symbol."
+n_orig_totsamp_aboriginal,Aboriginal
+n_orig_totsamp_afam,African-American
+n_orig_totsamp_afamasianother,"African American, Asian, or
+Other"
+n_orig_totsamp_afcarib,African or Caribbean
+n_orig_totsamp_american,American
+n_orig_totsamp_amindian,American Indian
+n_orig_totsamp_aian,"American Indian or Alaskan
+Native"
+n_orig_totsamp_asian,Asian
+n_orig_totsamp_asam,Asian American
+n_orig_totsamp_asianeastindian,"Asian, East Indian, Other
+Asian"
+n_orig_totsamp_asind,Asian Indian
+n_orig_totsamp_asianpacislander,Asian or Pacific Islander
+n_orig_totsamp_aus,Australian
+n_orig_totsamp_ausnz,Australia or New Zealand
+n_orig_totsamp_biracial,Biracial
+n_orig_totsamp_bimultracial,Biracial or multiracial
+n_orig_totsamp_black,Black
+n_orig_totsamp_blackafam,Black or African American
+n_orig_totsamp_brazil,Brazil
+n_orig_totsamp_canada,Canada
+n_orig_totsamp_caucasian,Caucasian
+n_orig_totsamp_chinese,Chinese
+n_orig_totsamp_cuba,Cuba
+n_orig_totsamp_domrep,Dominican Republic
+n_orig_totsamp_dutch,Dutch
+n_orig_totsamp_eastind,East Indian
+n_orig_totsamp_egypt,Egypt
+n_orig_totsamp_engeur,English or European
+n_orig_totsamp_ethminority,Ethnic Minority
+n_orig_totsamp_euram,European American
+n_orig_totsamp_filipino,Filipino
+n_orig_totsamp_finnish,Finnish
+n_orig_totsamp_firstnations,First Nations
+n_orig_totsamp_hispanic,Hispanic
+n_orig_totsamp_hispam,Hispanic American
+n_orig_totsamp_hisplatino,Hispanic or Latino
+n_orig_totsamp_india,India
+n_orig_totsamp_indian,Indian
+n_orig_totsamp_indig,Indigenous
+n_orig_totsamp_indonesia,Indonesia
+n_orig_totsamp_irish,Irish
+n_orig_totsamp_latinam,Latin American
+n_orig_totsamp_latino,Latino
+n_orig_totsamp_latinomixed,Latino or Mixed
+n_orig_totsamp_lebanon,Lebanon
+n_orig_totsamp_malay,Malay
+n_orig_totsamp_maori,Maori
+n_orig_totsamp_mexico,Mexico
+n_orig_totsamp_minority,Minority
+n_orig_totsamp_mixedeth,Mixed ethnicities
+n_orig_totsamp_mixedrace,Mixed racial background
+n_orig_totsamp_mixedmult,Mixed or multiple
+n_orig_totsamp_multiracial,Multiracial
+n_orig_totsamp_multicultural,Multicultural
+n_orig_totsamp_multiethnic,Multi-ethnic
+n_orig_totsamp_nativeam,Native American
+n_orig_totsamp_naan,"Native American or Alaskan
+Native"
+n_orig_totsamp_nathawpacislander,"Native Hawaiian or Pacific
+Islander"
+n_orig_totsamp_negro,Negro
+n_orig_totsamp_netherlands,Netherlands
+n_orig_totsamp_nzeuro,New Zealand European
+n_orig_totsamp_nicaragua,Nicaragua
+n_orig_totsamp_nonblack,Non-Black
+n_orig_totsamp_noncauc,Non-Caucasian
+n_orig_totsamp_nonhisp,Non-Hispanic
+n_orig_totsamp_norway,Norway
+n_orig_totsamp_norscand,Norweigan or Scandinavian
+n_orig_totsamp_other,Other
+n_orig_totsamp_otherunkn,Other/Unknown
+n_orig_totsamp_othereuro,Other European
+n_orig_totsamp_pacific,Pacific
+n_orig_totsamp_pacislanders,Pacific Islander
+n_orig_totsamp_polyam,Polynesian American
+n_orig_totsamp_polymalay,Polynesian Malay
+n_orig_totsamp_puertorico,Puerto Rico
+n_orig_totsamp_scandiv,Scandinavian
+n_orig_totsamp_singapore,Singapore
+n_orig_totsamp_southafrican,South African
+n_orig_totsamp_southamerican,South America
+n_orig_totsamp_spain,Spain
+n_orig_totsamp_undecleth,Undeclared ethnicity
+n_orig_totsamp_unknown,Unknown
+n_orig_totsamp_unrep,Unreported
+n_orig_totsamp_unspec,Unspecified
+n_orig_totsamp_uk,United Kingdom
+n_orig_totsamp_unitedstates,United States
+n_orig_totsamp_usenglspan,"US (English or Spanish
+Speaking)"
+n_orig_totsamp_uscanada,US or Canada
+n_orig_totsamp_usengl,"US - English as primary
+language"
+n_orig_totsamp_usspanish,"US - Spanish as primary
+language"
+n_orig_totsamp_venezuela,Venezuela
+n_orig_totsamp_white,White
+n_orig_totsamp_white_euroam,White or European American
+n_orig_totsamp_white_nonhisp,White (non-Hispanic)
+n_orig_totsamp_white_nonlatino,White (non-Latino)
+n_orig_totsamp_whitelatino,White Latino
+n_orig_totsamp_zimb,Zimbabwean
+total_sample_origin_complete,Complete?
+n_lang_nontbi_perc,"Are you reporting numbers of
+participants as whole numbers
+or a percentage of the group?
+If percentage, please report
+as values between 0-100. Do
+not include the ""%"" symbol."
+n_lang_nontbi_ausengl,Australian English
+n_lang_nontbi_both,Both English and Spanish
+n_lang_nontbi_chinese,Chinese
+n_lang_nontbi_czech,Czech
+n_lang_nontbi_dutch,Dutch
+n_lang_nontbi_english,English
+n_lang_nontbi_englfirst,English as first language
+n_lang_nontbi_englbi,"English Bilingual (any second
+language)"
+n_lang_nontbi_engspanbi,English-Spanish Bilingual
+n_lang_nontbi_engswed,English-Swedish Bilingual
+n_lang_nontbi_englpref,English Preferred
+n_lang_nontbi_englspanpref,English or Spanish Preferred
+n_lang_nontbi_englfrench,English or French
+n_lang_nontbi_englmalay,English or Malay
+n_lang_nontbi_englorspan,English or Spanish
+n_lang_nontbi_esl,English as a second language
+n_lang_nontbi_finnish,Finnish
+n_lang_nontbi_french,French
+n_lang_nontbi_german,German
+n_lang_nontbi_greek,Greek
+n_lang_nontbi_italian,Italian
+n_lang_nontbi_mandarin,Mandarin
+n_lang_nontbi_nonengnonfin,Non-English and non-Finnish
+n_lang_nontbi_other,Other
+n_lang_nontbi_russian,Russian
+n_lang_nontbi_spanish,Spanish
+n_lang_nontbi_seb,Spanish-English Bilingual
+n_lang_nontbi_spanpref,Spanish Preferred
+n_lang_nontbi_swedish,Swedish
+nontbi_group_language_complete,Complete?
+n_lang_mtbi_perc,"Are you reporting numbers of
+participants as whole numbers
+or a percentage of the group?
+If percentage, please report
+as values between 0-100. Do
+not include the ""%"" symbol."
+n_lang_mtbi_ausengl,Australian English
+n_lang_mtbi_both,Both English and Spanish
+n_lang_mtbi_chinese,Chinese
+n_lang_mtbi_czech,Czech
+n_lang_mtbi_dutch,Dutch
+n_lang_mtbi_english,English
+n_lang_mtbi_englfirst,English as first language
+n_lang_mtbi_englbi,"English Bilingual (any second
+language)"
+n_lang_mtbi_engspanbi,English-Spanish Bilingual
+n_lang_mtbi_engswed,English-Swedish Bilingual
+n_lang_mtbi_englpref,English Preferred
+n_lang_mtbi_englspanpref,English or Spanish Preferred
+n_lang_mtbi_englfrench,English or French
+n_lang_mtbi_englmalay,English or Malay
+n_lang_mtbi_englorspan,English or Spanish
+n_lang_mtbi_esl,English as a second language
+n_lang_mtbi_finnish,Finnish
+n_lang_mtbi_french,French
+n_lang_mtbi_german,German
+n_lang_mtbi_greek,Greek
+n_lang_mtbi_italian,Italian
+n_lang_mtbi_mandarin,Mandarin
+n_lang_mtbi_nonengnonfin,Non-English and non-Finnish
+n_lang_mtbi_other,Other
+n_lang_mtbi_russian,Russian
+n_lang_mtbi_spanish,Spanish
+n_lang_mtbi_seb,Spanish-English Bilingual
+n_lang_mtbi_spanpref,Spanish Preferred
+n_lang_mtbi_swedish,Swedish
+mtbi_or_concussion_group_language_complete,Complete?
+n_lang_modtbi_perc,"Are you reporting numbers of
+participants as whole numbers
+or a percentage of the group?
+If percentage, please report
+as values between 0-100. Do
+not include the ""%"" symbol."
+n_lang_modtbi_both,Both English and Spanish
+n_lang_modtbi_chinese,Chinese
+n_lang_modtbi_czech,Czech
+n_lang_modtbi_dutch,Dutch
+n_lang_modtbi_english,English
+n_lang_modtbi_englbi,"English Bilingual (any second
+language)"
+n_lang_modtbi_engspanbi,English-Spanish Bilingual
+n_lang_modtbi_engswed,English-Swedish Bilingual
+n_lang_modtbi_englpref,English Preferred
+n_lang_modtbi_englspanpref,English or Spanish Preferred
+n_lang_modtbi_englfrench,English or French
+n_lang_modtbi_englmalay,English or Malay
+n_lang_modtbi_englorspan,English or Spanish
+n_lang_modtbi_esl,English as a second language
+n_lang_modtbi_finnish,Finnish
+n_lang_modtbi_french,French
+n_lang_modtbi_german,German
+n_lang_modtbi_greek,Greek
+n_lang_modtbi_italian,Italian
+n_lang_modtbi_mandarin,Mandarin
+n_lang_modtbi_nonengnonfin,Non-English and non-Finnish
+n_lang_modtbi_other,Other
+n_lang_modtbi_russian,Russian
+n_lang_modtbi_spanish,Spanish
+n_lang_modtbi_seb,Spanish-English Bilingual
+n_lang_modtbi_spanpref,Spanish Preferred
+n_lang_modtbi_swedish,Swedish
+moderate_tbi_group_language_complete,Complete?
+n_lang_stbi_perc,"Are you reporting numbers of
+participants as whole numbers
+or a percentage of the group?
+If percentage, please report
+as values between 0-100. Do
+not include the ""%"" symbol."
+n_lang_stbi_both,Both English and Spanish
+n_lang_stbi_chinese,Chinese
+n_lang_stbi_czech,Czech
+n_lang_stbi_dutch,Dutch
+n_lang_stbi_english,English
+n_lang_stbi_englbi,"English Bilingual (any second
+language)"
+n_lang_stbi_engspanbi,English-Spanish Bilingual
+n_lang_stbi_engswed,English-Swedish Bilingual
+n_lang_stbi_englpref,English Preferred
+n_lang_stbi_englspanpref,English or Spanish Preferred
+n_lang_stbi_englfrench,English or French
+n_lang_stbi_englmalay,English or Malay
+n_lang_stbi_englorspan,English or Spanish
+n_lang_stbi_esl,English as a second language
+n_lang_stbi_finnish,Finnish
+n_lang_stbi_french,French
+n_lang_stbi_german,German
+n_lang_stbi_greek,Greek
+n_lang_stbi_italian,Italian
+n_lang_stbi_mandarin,Mandarin
+n_lang_stbi_nonengnonfin,Non-English and non-Finnish
+n_lang_stbi_other,Other
+n_lang_stbi_russian,Russian
+n_lang_stbi_spanish,Spanish
+n_lang_stbi_seb,Spanish-English Bilingual
+n_lang_stbi_spanpref,Spanish Preferred
+n_lang_stbi_swedish,Swedish
+severe_tbi_group_language_complete,Complete?
+n_lang_totsamp_perc,"Are you reporting numbers of
+participants as whole numbers
+or a percentage of the group?
+If percentage, please report
+as values between 0-100. Do
+not include the ""%"" symbol."
+n_lang_totsamp_both,Both English and Spanish
+n_lang_totsamp_chinese,Chinese
+n_lang_totsamp_czech,Czech
+n_lang_totsamp_dutch,Dutch
+n_lang_totsamp_english,English
+n_lang_totsamp_englfirst,English as first language
+n_lang_totsamp_englbi,"English Bilingual (any second
+language)"
+n_lang_totsamp_engspanbi,English-Spanish Bilingual
+n_lang_totsamp_engswed,English-Swedish Bilingual
+n_lang_totsamp_englpref,English Preferred
+n_lang_totsamp_englspanpref,English or Spanish Preferred
+n_lang_totsamp_englafrik,English or Afrikaans
+n_lang_totsamp_englfrench,English or French
+n_lang_totsamp_englmalay,English or Malay
+n_lang_totsamp_englorspan,English or Spanish
+n_lang_totsamp_esl,English as a second language
+n_lang_totsamp_finnish,Finnish
+n_lang_totsamp_french,French
+n_lang_totsamp_german,German
+n_lang_totsamp_greek,Greek
+n_lang_totsamp_italian,Italian
+n_lang_totsamp_mandarin,Mandarin
+n_lang_totsamp_nonengl,Non-English
+n_lang_totsamp_nonengnonfin,Non-English and non-Finnish
+n_lang_totsamp_other,Other
+n_lang_totsamp_russian,Russian
+n_lang_totsamp_spanish,Spanish
+n_lang_totsamp_seb,Spanish-English Bilingual
+n_lang_totsamp_spanpref,Spanish Preferred
+n_lang_totsamp_swedish,Swedish
+total_sample_language_complete,Complete?
+cognitive_test_1,Cognitive Test 1
+cognitive_test_2,Cognitive Test 2
+cognitive_test_3,Cognitive Test 3
+cognitive_test_4,Cognitive Test 4
+cognitive_test_5,Cognitive Test 5
+cognitive_test_6,Cognitive Test 6
+cognitive_test_7,Cognitive Test 7
+cognitive_test_8,Cognitive Test 8
+cognitive_test_9,Cognitive Test 9
+cognitive_test_10,Cognitive Test 10
+cognitive_test_11,Cognitive Test 11
+cognitive_test_12,Cognitive Test 12
+cognitive_test_13,Cognitive Test 13
+cognitive_test_14,Cognitive Test 14
+cognitive_test_15,Cognitive Test 15
+cognitive_test_16,Cognitive Test 16
+cognitive_tests_complete,Complete?
